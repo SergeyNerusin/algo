@@ -27,7 +27,7 @@ export const ListPage: React.FC = () => {
   const [inputValueIndex, setInputValueIndex] = useState<number>(-1);
   const [array, setListArray] = useState<Array<IElement>>(list.getArrColor());
   const [isFullList, setIsFullList] = useState<boolean>(false);
-  const [isEmptyList, setisEmptyList] = useState<boolean>(false);
+  const [isEmptyList, setIsEmptyList] = useState<boolean>(false);
   const [isloader, setIsLoader] = useState<IListLoader>({
     isAddHead: false,
     isAddTail: false,
@@ -48,7 +48,6 @@ export const ListPage: React.FC = () => {
 
   const handleAddHead = async () => {
     if (list.getSize() <= SIZE_LINKED_LIST) {
-      setisEmptyList(false);
       setIsLoader({
         ...isloader,
         isAddHead: true,
@@ -74,6 +73,7 @@ export const ListPage: React.FC = () => {
       };
       list.prepend(inputValue);
       array.unshift(headNewElement);
+      setIsEmptyList(false);
       array[1] = {
         ...array[1],
         state: ElementStates.Default,
@@ -81,6 +81,7 @@ export const ListPage: React.FC = () => {
       };
       setListArray([...array]);
       await delay(DELAY_MILLISECONDS_500);
+
       array[0] = {
         ...array[0],
         state: ElementStates.Default,
@@ -153,11 +154,11 @@ export const ListPage: React.FC = () => {
   };
 
   const handleDelHead = async () => {
-    if (list.getSize() >= 1) {
-      setisEmptyList(false);
+    if (list.getSize() > 1) {
+      setIsEmptyList(false);
       setIsLoader({
         ...isloader,
-        isDelTail: true,
+        isDelHead: true,
         disabled: true,
       });
       array[0] = {
@@ -170,6 +171,9 @@ export const ListPage: React.FC = () => {
       await delay(DELAY_MILLISECONDS_500);
       list.popHead();
       array.shift();
+      if (list.getSize() <= 1) {
+        setIsEmptyList(true);
+      }
       setListArray(array);
       setIsLoader({
         ...isloader,
@@ -177,14 +181,14 @@ export const ListPage: React.FC = () => {
         disabled: false,
       });
     } else {
-      setisEmptyList(true);
+      setIsEmptyList(true);
     }
     setInputValue('');
   };
 
   const handleDelTail = async () => {
     const indexTail = list.getSize();
-    if (indexTail >= 1) {
+    if (indexTail > 1) {
       setIsLoader({
         ...isloader,
         isDelTail: true,
@@ -198,17 +202,19 @@ export const ListPage: React.FC = () => {
       };
       setListArray(array);
       await delay(DELAY_MILLISECONDS_500);
-      if (indexTail - 1 === 0) {
-        setisEmptyList(true);
-      }
       list.popTail();
+      if (list.getSize() <= 1) {
+        setIsEmptyList(true);
+      }
       array.pop();
       setListArray(array);
       setIsLoader({
         ...isloader,
-        isDelTail: false,
+        isDelHead: false,
         disabled: false,
       });
+    } else {
+      setIsEmptyList(true);
     }
     setInputValue('');
   };
@@ -288,11 +294,7 @@ export const ListPage: React.FC = () => {
 
   const handleDelIndex = async () => {
     const indexElemement = Number(inputValueIndex);
-    if (inputValueIndex === 0) {
-      handleDelHead();
-      return;
-    }
-    if (0 < indexElemement && indexElemement <= list.getSize()) {
+    if (0 <= indexElemement && indexElemement <= list.getSize()) {
       setIsLoader({
         ...isloader,
         isDelByIndex: true,
@@ -325,6 +327,9 @@ export const ListPage: React.FC = () => {
       await delay(DELAY_MILLISECONDS_500);
       list.delByIndex(indexElemement);
       array.splice(indexElemement, 1);
+      if (list.getSize() <= 1) {
+        setIsEmptyList(true);
+      }
       setListArray([...array]);
       setListArray(list.getArrColor());
       setIsLoader({
@@ -333,7 +338,7 @@ export const ListPage: React.FC = () => {
         disabled: false,
       });
     } else {
-      setisEmptyList(true);
+      setIsEmptyList(true);
     }
     setInputValueIndex(-1);
     setInputValue('');
@@ -404,7 +409,7 @@ export const ListPage: React.FC = () => {
             disabled={
               inputValue === '' ||
               inputValueIndex < 0 ||
-              inputValueIndex > list.getSize() ||
+              inputValueIndex > list.getSize() - 1 ||
               isloader.disabled ||
               isFullList
             }
