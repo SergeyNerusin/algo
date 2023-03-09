@@ -11,6 +11,10 @@
   gap: 12px;
 }
 
+.info {
+  text-align: center;
+}
+
 .showstack {
   display: flex;
   justify-content: center;
