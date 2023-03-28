@@ -17,5 +17,10 @@
     "jsx": "react-jsx",
     "types": ["cypress", "node"]
   },
-  "include": ["**/*.ts", "src/components/app/app.tsx"]
+  "include": [
+    "**/*.ts",
+    "src/components/app/app.tsx",
+    "cypress/e2e/string.spec.cy.js",
+    "cypress/e2e/routing.spec.cy.js"
+  ]
 }

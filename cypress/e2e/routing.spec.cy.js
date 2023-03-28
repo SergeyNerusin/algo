@@ -45,5 +45,3 @@ describe('Application launch testing', () => {
     cy.contains('Связный список');
   });
 });
-
-export {};

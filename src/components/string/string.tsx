@@ -52,6 +52,7 @@ export const StringPage: React.FC = () => {
     <SolutionLayout title='Строка'>
       <form className={styles.container} onSubmit={onSubmitReverse}>
         <Input
+          data-cy='input'
           placeholder='Введите текст'
           onChange={onChange}
           value={inputValue}
@@ -60,6 +61,7 @@ export const StringPage: React.FC = () => {
           extraClass='mr-6'
         />
         <Button
+          data-cy='button-reverse'
           type={'submit'}
           text={'Развернуть'}
           isLoader={isloader}
