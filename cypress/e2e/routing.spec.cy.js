@@ -43,5 +43,7 @@ describe('Application launch testing', () => {
   it('List page available', () => {
     cy.visit('/list');
     cy.contains('Связный список');
+    cy.wait(3000);
+    cy.visit('/');
   });
 });

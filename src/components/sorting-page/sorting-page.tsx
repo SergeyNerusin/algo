@@ -140,6 +140,7 @@ export const SortingPage: React.FC = () => {
         />
         <div className={styles.btn_wrapper}>
           <Button
+            data-cy='button-increase'
             text={'По возрастанию'}
             sorting={Direction.Ascending}
             onClick={() => handleStartSort('increase')}
@@ -147,6 +148,7 @@ export const SortingPage: React.FC = () => {
             disabled={isSorting === 'descending'}
           />
           <Button
+            data-cy='button-descending'
             text={'По убыванию'}
             sorting={Direction.Descending}
             onClick={() => handleStartSort('descending')}
@@ -155,6 +157,7 @@ export const SortingPage: React.FC = () => {
           />
         </div>
         <Button
+          data-cy='new-array'
           text={'Новый массив'}
           onClick={handleGetNewArray}
           disabled={isDisabledRadio.babble || isDisabledRadio.choice}

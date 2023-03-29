@@ -358,17 +358,17 @@ export const ListPage: React.FC = () => {
             autoFocus
           />
           <Button
-            text={'Добавить в Head'}
+            text={'Добавить в head'}
             type='button'
             onClick={handleAddHead}
-            extraClass={styles.button_m}
+            linkedList='small'
             isLoader={isloader.isAddHead}
             disabled={inputValue === '' || isloader.disabled || isFullList}
           />
           <Button
             text={'Добавить в tail'}
             type='button'
-            extraClass={styles.button_m}
+            linkedList='small'
             onClick={handleAddTail}
             isLoader={isloader.isAddTail}
             disabled={inputValue === '' || isloader.disabled || isFullList}
@@ -376,7 +376,7 @@ export const ListPage: React.FC = () => {
           <Button
             text={'Удалить из head'}
             type='button'
-            extraClass={styles.button_m}
+            linkedList='small'
             onClick={handleDelHead}
             isLoader={isloader.isDelHead}
             disabled={isloader.disabled || isEmptyList}
@@ -384,7 +384,7 @@ export const ListPage: React.FC = () => {
           <Button
             text={'Удалить из tail'}
             type='button'
-            extraClass={styles.button_m}
+            linkedList='small'
             onClick={handleDelTail}
             isLoader={isloader.isDelTail}
             disabled={isloader.disabled || isEmptyList}
@@ -403,7 +403,7 @@ export const ListPage: React.FC = () => {
           <Button
             text={'Добавить по индексу'}
             type='button'
-            extraClass={styles.button_l}
+            linkedList='big'
             onClick={handleAddIndex}
             isLoader={isloader.isAddByIndex}
             disabled={
@@ -417,7 +417,8 @@ export const ListPage: React.FC = () => {
           <Button
             text={'Удалить по индексу'}
             type='button'
-            extraClass={styles.button_l}
+            // extraClass={styles.button_l}
+            linkedList='big'
             onClick={handleDelIndex}
             isLoader={isloader.isDelByIndex}
             disabled={
