@@ -8,8 +8,7 @@ import { ElementStates } from '../../types/element-states';
 import { IArrayNumbers, getArrayNumbers, swap } from './random-arr';
 import { delay, DELAY_MILLISECONDS } from '../../utils/delay';
 import { Column } from '../ui/column/column';
-
-type TSorting = 'increase' | 'descending' | 'start';
+import { TSorting } from './random-arr';
 
 type Tmethod = {
   choice: boolean;
