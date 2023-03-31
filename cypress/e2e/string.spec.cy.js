@@ -1,3 +1,4 @@
+import { elementInput, buttonReverse } from '../constants/constants';
 import { DELAY_MILLISECONDS } from '../../src/utils/delay';
 describe('check permutation of a string in reverse order', () => {
   beforeEach(() => {
@@ -6,15 +7,15 @@ describe('check permutation of a string in reverse order', () => {
   });
 
   it('initial state input line is empty, "reverse" button is disabled', () => {
-    cy.get('[data-cy="input"]').should('have.value', '');
-    cy.get('[data-cy="button-reverse"]').should('be.disabled');
+    cy.get(elementInput).should('have.value', '');
+    cy.get(buttonReverse).should('be.disabled');
   });
 
   it('check reverse string', () => {
-    cy.get('[data-cy="input"]').type('ytrewq');
-    cy.get('[data-cy="button-reverse"]').should('not.be.disabled');
-    cy.get('[data-cy="button-reverse"]').click();
-    cy.get('[data-cy="button-reverse"]')
+    cy.get(elementInput).type('ytrewq');
+    cy.get(buttonReverse).should('not.be.disabled');
+    cy.get(buttonReverse).click();
+    cy.get(buttonReverse)
       .invoke('attr', 'class')
       .then((classList) => expect(classList).contains('loader'));
 
@@ -154,7 +155,7 @@ describe('check permutation of a string in reverse order', () => {
   });
 
   it('input line is clear after reverse string, "reverse" button is disabled', () => {
-    cy.get('[data-cy="input"]').should('have.value', '');
-    cy.get('[data-cy="button-reverse"]').should('be.disabled');
+    cy.get(elementInput).should('have.value', '');
+    cy.get(buttonReverse).should('be.disabled');
   });
 });
