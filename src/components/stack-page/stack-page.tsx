@@ -85,9 +85,10 @@ export const StackPage: React.FC = () => {
 
   return (
     <SolutionLayout title='Стек'>
-      <form className={styles.container}>
+      <form className={styles.container} onSubmit={(e) => e.preventDefault()}>
         <div className={styles.wrapper}>
           <Input
+            data-cy='input'
             placeholder='Введите текст'
             onChange={onChange}
             value={inputValue}
@@ -97,6 +98,7 @@ export const StackPage: React.FC = () => {
             autoFocus
           />
           <Button
+            data-cy='button-add'
             text={'Добавить'}
             type='button'
             onClick={() => handlePushValue(inputValue)}
@@ -104,6 +106,7 @@ export const StackPage: React.FC = () => {
             disabled={inputValue === '' || isloader.disabled || stack.isFull()}
           />
           <Button
+            data-cy='button-delete'
             text={'Удалить'}
             type='button'
             onClick={handlePopValue}
@@ -112,6 +115,7 @@ export const StackPage: React.FC = () => {
           />
         </div>
         <Button
+          data-cy='button-clear'
           text={'Очистить'}
           type='button'
           onClick={handleClearStack}
