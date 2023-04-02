@@ -88,9 +88,10 @@ export const QueuePage: React.FC = () => {
 
   return (
     <SolutionLayout title='Очередь'>
-      <form className={styles.container}>
+      <form className={styles.container} onSubmit={(e) => e.preventDefault()}>
         <div className={styles.wrapper}>
           <Input
+            data-cy='input'
             placeholder='Введите текст'
             onChange={onChange}
             value={inputValue}
@@ -100,6 +101,7 @@ export const QueuePage: React.FC = () => {
             autoFocus
           />
           <Button
+            data-cy='button-add'
             text={'Добавить'}
             type='button'
             onClick={handleEnqueue}
@@ -107,6 +109,7 @@ export const QueuePage: React.FC = () => {
             disabled={inputValue === '' || queue.isFull() || isloader.disabled}
           />
           <Button
+            data-cy='button-delete'
             text={'Удалить'}
             type='button'
             onClick={handleDequeue}
@@ -115,6 +118,7 @@ export const QueuePage: React.FC = () => {
           />
         </div>
         <Button
+          data-cy='button-clear'
           text={'Очистить'}
           type='button'
           onClick={handleClearQueue}
