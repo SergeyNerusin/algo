@@ -113,6 +113,6 @@ describe('check work stack componet', () => {
     cy.get(buttonAdd).should('be.disabled');
     cy.get(buttonDelete).should('be.disabled');
     cy.get(buttonClear).should('be.disabled');
-    cy.get(renderCircle).children().next().should('not.exist');
+    cy.get(renderCircle).children().nextAll().should('not.exist');
   });
 });
