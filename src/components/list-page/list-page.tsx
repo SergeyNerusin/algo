@@ -24,7 +24,7 @@ const SIZE_LINKED_LIST = 7;
 
 export const ListPage: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
-  const [inputValueIndex, setInputValueIndex] = useState<number>(-1);
+  const [inputValueIndex, setInputValueIndex] = useState<number>(0);
   const [array, setListArray] = useState<Array<IElement>>(list.getArrColor());
   const [isFullList, setIsFullList] = useState<boolean>(false);
   const [isEmptyList, setIsEmptyList] = useState<boolean>(false);
@@ -288,7 +288,7 @@ export const ListPage: React.FC = () => {
     } else {
       setIsFullList(true);
     }
-    setInputValueIndex(-1);
+    setInputValueIndex(0);
     setInputValue('');
   };
 
@@ -340,15 +340,16 @@ export const ListPage: React.FC = () => {
     } else {
       setIsEmptyList(true);
     }
-    setInputValueIndex(-1);
+    setInputValueIndex(0);
     setInputValue('');
   };
 
   return (
     <SolutionLayout title='Связный список'>
       <div className={styles.container}>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
           <Input
+            data-cy='input'
             placeholder='Введите значение'
             onChange={onChangeValue}
             value={inputValue}
@@ -358,52 +359,58 @@ export const ListPage: React.FC = () => {
             autoFocus
           />
           <Button
-            text={'Добавить в Head'}
+            data-cy='button-add-head'
+            text={'Добавить в head'}
             type='button'
             onClick={handleAddHead}
-            extraClass={styles.button_m}
+            linkedList='small'
             isLoader={isloader.isAddHead}
             disabled={inputValue === '' || isloader.disabled || isFullList}
           />
           <Button
+            data-cy='button-add-tail'
             text={'Добавить в tail'}
             type='button'
-            extraClass={styles.button_m}
+            linkedList='small'
             onClick={handleAddTail}
             isLoader={isloader.isAddTail}
             disabled={inputValue === '' || isloader.disabled || isFullList}
           />
           <Button
+            data-cy='button-delete-head'
             text={'Удалить из head'}
             type='button'
-            extraClass={styles.button_m}
+            linkedList='small'
             onClick={handleDelHead}
             isLoader={isloader.isDelHead}
             disabled={isloader.disabled || isEmptyList}
           />
           <Button
+            data-cy='button-delete-tail'
             text={'Удалить из tail'}
             type='button'
-            extraClass={styles.button_m}
+            linkedList='small'
             onClick={handleDelTail}
             isLoader={isloader.isDelTail}
             disabled={isloader.disabled || isEmptyList}
           />
         </form>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
           <Input
+            data-cy='input-index'
             placeholder='Введите индекс'
             type='number'
             max={list.getSize() - 1}
-            min={-1}
+            min={0}
             extraClass={styles.input}
             onChange={onChangeIndex}
             value={inputValueIndex}
           />
           <Button
+            data-cy='button-add-index'
             text={'Добавить по индексу'}
             type='button'
-            extraClass={styles.button_l}
+            linkedList='big'
             onClick={handleAddIndex}
             isLoader={isloader.isAddByIndex}
             disabled={
@@ -415,9 +422,10 @@ export const ListPage: React.FC = () => {
             }
           />
           <Button
+            data-cy='button-delete-index'
             text={'Удалить по индексу'}
             type='button'
-            extraClass={styles.button_l}
+            linkedList='big'
             onClick={handleDelIndex}
             isLoader={isloader.isDelByIndex}
             disabled={
@@ -431,7 +439,7 @@ export const ListPage: React.FC = () => {
       </div>
       <ul className={styles.showlist}>
         {array.map((item, index) => (
-          <li className={styles.item} key={index}>
+          <li data-cy='li-element' className={styles.item} key={index}>
             {!!item.position && (
               <Circle
                 extraClass={`${styles.circle_m} ${styles[`${item.position}`]}`}

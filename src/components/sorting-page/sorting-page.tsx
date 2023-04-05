@@ -8,8 +8,7 @@ import { ElementStates } from '../../types/element-states';
 import { IArrayNumbers, getArrayNumbers, swap } from './random-arr';
 import { delay, DELAY_MILLISECONDS } from '../../utils/delay';
 import { Column } from '../ui/column/column';
-
-type TSorting = 'increase' | 'descending' | 'start';
+import { TSorting } from './random-arr';
 
 type Tmethod = {
   choice: boolean;
@@ -122,7 +121,7 @@ export const SortingPage: React.FC = () => {
 
   return (
     <SolutionLayout title='Сортировка массива'>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
         <RadioInput
           label='Выбор'
           onChange={onChangeRadio}
@@ -140,6 +139,7 @@ export const SortingPage: React.FC = () => {
         />
         <div className={styles.btn_wrapper}>
           <Button
+            data-cy='button-increase'
             text={'По возрастанию'}
             sorting={Direction.Ascending}
             onClick={() => handleStartSort('increase')}
@@ -147,6 +147,7 @@ export const SortingPage: React.FC = () => {
             disabled={isSorting === 'descending'}
           />
           <Button
+            data-cy='button-descending'
             text={'По убыванию'}
             sorting={Direction.Descending}
             onClick={() => handleStartSort('descending')}
@@ -155,6 +156,7 @@ export const SortingPage: React.FC = () => {
           />
         </div>
         <Button
+          data-cy='new-array'
           text={'Новый массив'}
           onClick={handleGetNewArray}
           disabled={isDisabledRadio.babble || isDisabledRadio.choice}

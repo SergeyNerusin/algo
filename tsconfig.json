@@ -14,7 +14,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["cypress", "node"]
   },
-  "include": ["src"]
+  "include": [
+    "**/*.ts",
+    "src/components/app/app.tsx",
+    "cypress/e2e/string.spec.cy.js",
+    "cypress/e2e/routing.spec.cy.js"
+  ]
 }
