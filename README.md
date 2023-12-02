@@ -1,6 +1,6 @@
 # Проектная работа. МБОУ АЛГОСОШ им. Фибоначчи
 
-Данная проект это web-приложение, которое визуализирует работу популярных алгоритмов и структур данных.
+Это web-приложение, которое визуализирует работу популярных алгоритмов и структур данных.
 - Проект реализован на [React](https://ru.react.js.org/docs/getting-started.html) с использованием [TypeScript](https://www.typescriptlang.org/)
 - Дизайн проекта [дизайн проекта](https://www.figma.com/file/RIkypcTQN5d37g7RRTFid0/Algososh_external_link?node-id=0%3A1).
 
